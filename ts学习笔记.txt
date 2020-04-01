@@ -1,0 +1,87 @@
+使用npm安装ts：npm install -g typescript
+
+安装完成后我们可以使用 tsc 命令来执行 TypeScript 的相关代码，以下是查看版本号：
+tsc -v
+Version 3.2.2
+
+使用 node 命令来执行 test.ts 文件：
+命令 tsc test.ts 可以编译ts代码，可以在目录下看到生成了一个test.js文件
+
+node test.ts   或者 node test.js  执行代码
+Hello World
+
+我们可以同时编译多个 ts 文件：
+tsc file1.ts file2.ts file3.ts
+
+函数重载:
+声明：
+public funa(a:number):string; 
+public funa(a:number,b:number):string;
+
+定义:
+public funa(a:number,b?:number){
+        console.log(a,b);
+        return "5";
+}
+
+定义的时候要注意参数和返回值
+返回值必须一致，参数如果没有可以在变量后边加上？表示有或者没有。  如果类型不同，在变量后边的类型上都写上用 |  分开（联合类型）
+
+匿名函数自调用在函数后使用 () 即可：
+TypeScript
+(function () { 
+    var x = "Hello!!";   
+    console.log(x)     
+ })()
+编译以上代码，得到以下 JavaScript 代码：
+
+JavaScript
+(function () { 
+    var x = "Hello!!";   
+    console.log(x)    
+})()
+输出结果为：
+
+Hello!!
+
+
+联合类型（Union Types）可以通过管道(|)将变量设置多种类型，赋值时可以根据设置的类型来赋值。
+
+注意：只能赋值指定的类型，如果赋值其它类型就会报错。
+
+创建联合类型的语法格式如下：
+
+Type1|Type2|Type3 
+
+类可以实现接口，使用关键字 implements，
+interface ILoan { 
+   interest:number 
+} 
+ 
+class AgriLoan implements ILoan { 
+   interest:number 
+   rebate:number 
+   
+   constructor(interest:number,rebate:number) { 
+      this.interest = interest 
+      this.rebate = rebate 
+   } 
+} 
+ 
+var obj = new AgriLoan(10,1) 
+console.log("利润为 : "+obj.interest+"，抽成为 : "+obj.rebate )
+
+
+import   ./  导入同级目录
+
+export 和export default的区别
+1、export与export default均可用于导出常量、函数、文件、模块等
+2、你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用
+3、在一个文件或模块中，export、import可以有多个，export default仅有一个
+4、通过export方式导出，在导入时要加{ }，export default则不需要
+
+
+ts调用js方法：2种 
+import * as ADAdapter from "./eric_gg/fastAD/ADAdapter"
+
+import ADAdapter = require("./eric_gg/fastAD/ADAdapter");
