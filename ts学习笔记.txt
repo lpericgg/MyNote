@@ -85,3 +85,22 @@ ts调用js方法：2种
 import * as ADAdapter from "./eric_gg/fastAD/ADAdapter"
 
 import ADAdapter = require("./eric_gg/fastAD/ADAdapter");
+若使用export =导出一个模块，则必须使用TypeScript的特定语法import module = require("module")来导入此模块。
+而js的导出方式是 module.export = name，所以在ts调用js 就用 import name  = require("name");导入
+
+或者一个模块可以包裹多个模块，并把他们导出的内容联合在一起通过语法：export * from "module"。
+
+
+for..of和for..in均可迭代一个列表；但是用于迭代的值却不同，for..in迭代的是对象的 键 的列表，而for..of则迭代对象的键对应的值。
+
+不要把一般的重载放在精确的重载前面：
+/* 错误 */
+declare function fn(x: any): any;
+declare function fn(x: HTMLElement): number;
+declare function fn(x: HTMLDivElement): string;
+应该排序重载令精确的排在一般的之前：
+/* OK */
+declare function fn(x: HTMLDivElement): string;
+declare function fn(x: HTMLElement): number;
+declare function fn(x: any): any;
+TypeScript会选择第一个匹配到的重载当解析函数调用的时候。 当前面的重载比后面的“普通”，那么后面的被隐藏了不会被调用。
